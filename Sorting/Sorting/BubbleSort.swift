@@ -74,6 +74,47 @@ class BubbleSort: Bubble {
   }
   
   func previousStepTapped() -> SortItem {
-    return .init(currentIndex: 0, nextIndex: 0, colorCurrentIndex: .black, colorNextIndex: .black, shouldSwipe: false)
+    modifiedArray = array
+    step -= 1
+    
+    var currentStep = 0
+    var currentIndex = 0
+    var nextIndex = 0
+    var shouldSwipe = false
+    
+    for i in 0..<modifiedArray.count {
+      if currentStep == step {
+        break
+      }
+      
+      for j in 0..<modifiedArray.count-i-1 {
+    
+        currentIndex = j
+        nextIndex = j + 1
+        currentStep += 1
+        
+        if modifiedArray[j] > modifiedArray[j+1] {
+          shouldSwipe = true
+          
+          let temp = modifiedArray[j]
+          modifiedArray[j] = modifiedArray[j+1]
+          modifiedArray[j+1] = temp
+        } else {
+          shouldSwipe = false
+        }
+        
+        if currentStep  == step {
+          break
+        }
+      }
+    }
+
+    return .init(
+      currentIndex: currentIndex,
+      nextIndex: nextIndex,
+      colorCurrentIndex: .green,
+      colorNextIndex: shouldSwipe ? .green : .yellow,
+      shouldSwipe: shouldSwipe
+    )
   }
 }

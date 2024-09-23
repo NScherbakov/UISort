@@ -38,6 +38,10 @@ class SortPresenter: SortPresenterProtocol {
   }
   
   func previousStepTapped() -> SortItem {
-    return sortModel.previousStepTapped()
+    // TO DO DOESNT WORK NOW
+    let item = sortModel.previousStepTapped()
+    array = sortModel.currentArray()
+    
+    return item
   }
 }
